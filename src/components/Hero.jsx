@@ -10,12 +10,12 @@ const Hero = () => {
   const totalVideos = 4;
   const nextVideoRef = useRef(null);
 
-  
+
   const upcomingVideoInex = (currentIndex % totalVideos) + 1;
 
   const handleMinivideoplayerClick = () => {
     setHasClicked(true);
-    setCurrentIndex((prevIndex) => (prevIndex % totalVideos) + 1);
+    setCurrentIndex(upcomingVideoInex);
   };
 
   const handleVideoLoad = () => {
@@ -32,18 +32,39 @@ const Hero = () => {
             <div onClick={handleMinivideoplayerClick} className='origin-center scale-50 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100'>
               <video
                 ref={nextVideoRef}
-                src={getVideoSrc(currentIndex + 1)}
+                src={getVideoSrc(upcomingVideoInex)}
                 type='video/mp4'
                 loop
                 muted
                 id='current-video'
-                className='size-64 origin-center scale-150 object-cover object-center'
+                className='size-64 origin-center scale-150 object-cover object-center invisible'
                 onLoadedData={handleVideoLoad}
               />
-              <h1>Video</h1>
             </div>
           </div>
+
+          <video
+            ref={nextVideoRef}
+            src={getVideoSrc(currentIndex)}
+            loop
+            muted
+            id='next-video'
+            className='absolute-center absolute z-20 size-64 object-cover object-center invisible'
+            onLoadedData={handleVideoLoad}
+          />
+
+          <video
+            src={getVideoSrc(currentIndex === totalVideos - 1 ? 1 : currentIndex)}
+            autoPlay
+            loop
+            muted
+            className='absolute left-0 top-0 size-full object-cover object-center'
+          />
         </div>
+
+        <h1 className='special-font hero-heading absolute bottom-5 z-40 text-blue-100'>
+          G<b>a</b>ming
+        </h1>
       </div>
     </div>
   )
