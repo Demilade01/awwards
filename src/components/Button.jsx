@@ -8,7 +8,7 @@ const Button = ({ id, title, rightIcon, leftIcon, containerClass }) => {
       <span className='relative incline-flex overflow-hidden font-general text-xs uppercase'>
         <div>
           {title}
-        </div> 
+        </div>
       </span>
       {rightIcon}
     </button>
